@@ -1,0 +1,13 @@
+<launch>
+  <!--
+    SIM_ONLY lidar mapper. It creates /map and map->odom TF but has no motion
+    producer and cannot command Gazebo by itself.
+  -->
+  <node name="raicom_sim_gmapping"
+        pkg="gmapping"
+        type="slam_gmapping"
+        output="screen">
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_mapping.yaml" />
+    <remap from="scan" to="/fuse_scan" />
+  </node>
+</launch>

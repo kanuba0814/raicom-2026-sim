@@ -1,0 +1,42 @@
+# 2026 industrial-group simulation assumptions.
+# Source: current 36-page rule baseline and official technical attachment.
+# This file deliberately contains no inferred coordinates or final task geometry.
+metadata:
+  status: provisional
+  authoritative_rule: docs/2026睿抗·魔力元宝赛题规则.pdf
+  attachment_scope: official-technical-baseline-not-final-task-environment
+field:
+  dimensions_m: [7.0, 3.5]
+  red_blue_opposition: true
+  virtual_boundary_geometry: []  # Await final CAD / referee confirmation.
+team_side:
+  value: unassigned  # Set only from verified event-side assignment.
+warehouse_semantics:
+  qr_warehouse: null       # Page 15 and pages 24-25 conflict.
+  package1_warehouse: null
+  package2_warehouse: null
+material_island:
+  count: unconfirmed       # Page 5 and page 15 conflict.
+  ownership: unconfirmed
+  initial_stock:
+    material1: 1
+    material2: 2
+  refresh:
+    every_minutes: 5
+    replenish_to:
+      material1: 1
+      material2: 2
+scoring:
+  qr_stack_per_item: 10
+  package1_material1:
+    score: unconfirmed     # Page 26 table: 15; following settlement prose: 25.
+  package2_material2:
+    score: unconfirmed     # Page 26 table: 25; following settlement prose: 15.
+  settlement_threshold_gross_score: 100
+  score_freezes_after_settlement: true
+safety:
+  prohibit_crossing_boundary: true
+  require_stop_for_referee_recovery: true
+  require_stop_for_referee_judgement: true
+  soft_stop_required: true
+  hard_stop_required: true

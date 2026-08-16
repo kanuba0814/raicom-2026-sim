@@ -1,0 +1,6 @@
+<launch>
+  <arg name="profile" default="$(find raicom_state_server)/config/robot_profile.yaml"/>
+  <node pkg="raicom_state_server" type="state_server.py" name="raicom_state_server" output="screen">
+    <rosparam command="load" file="$(arg profile)" param="profile"/>
+  </node>
+</launch>

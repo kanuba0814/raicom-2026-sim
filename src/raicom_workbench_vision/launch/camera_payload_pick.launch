@@ -1,0 +1,15 @@
+<launch>
+  <!-- Standalone calibrated camera payload perception: no AR or Gazebo nodes. -->
+  <arg name="camera_image" default="/hand_camera/image_raw"/>
+  <arg name="camera_info" default="/hand_camera/camera_info"/>
+  <arg name="payload_pick_config" default="$(find raicom_workbench_vision)/config/camera_payload_pick.yaml"/>
+  <arg name="request_topic" default="/raicom/workbench/camera_payload_pick/request"/>
+
+  <node pkg="raicom_workbench_vision" type="camera_payload_pick_detector.py"
+        name="camera_payload_pick_detector" output="screen">
+    <param name="config" value="$(arg payload_pick_config)"/>
+    <param name="image_topic" value="$(arg camera_image)"/>
+    <param name="camera_info_topic" value="$(arg camera_info)"/>
+    <param name="request_topic" value="$(arg request_topic)"/>
+  </node>
+</launch>

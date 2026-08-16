@@ -1,0 +1,6 @@
+<launch>
+  <!-- Read-only HMI: subscribes to semantic state only and never publishes device commands. -->
+  <node pkg="raicom_hmi" type="hmi_presenter.py" name="raicom_hmi_presenter" output="screen">
+    <param name="mission_snapshot_topic" value="/raicom/mission/snapshot" />
+  </node>
+</launch>

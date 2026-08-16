@@ -1,0 +1,13 @@
+{
+  "class_mapping": {
+    "detector_material_a": "material_a",
+    "detector_material_b": "material_b"
+  },
+  "minimum_confidence": 0.75,
+  "minimum_stability": 1.0,
+  "required_consecutive_frames": 2,
+  "maximum_frame_age_s": 0.5,
+  "model_path": "models/migration-candidate.onnx",
+  "model_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "model_verification": "SIM_TESTED"
+}

@@ -1,0 +1,26 @@
+<launch>
+  <!--
+    SIM_ONLY saved-map localization. It contains no motion producer, map->odom
+    static transform, planner, or goal receiver. AMCL alone owns map->odom.
+  -->
+  <arg name="map_file"/>
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_a" default="1.57"/>
+  <node name="raicom_sim_map_server"
+        pkg="map_server"
+        type="map_server"
+        args="$(arg map_file)"
+        output="screen"/>
+  <node name="raicom_sim_amcl"
+        pkg="amcl"
+        type="amcl"
+        output="screen">
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_localization.yaml"/>
+    <!-- SIM_ONLY runtime seed sampled from current odometry by raicomctl. -->
+    <param name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <param name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <param name="initial_pose_a" value="$(arg initial_pose_a)"/>
+    <remap from="scan" to="/fuse_scan"/>
+  </node>
+</launch>

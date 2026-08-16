@@ -1,0 +1,35 @@
+<launch>
+  <!--
+    SIM_ONLY navigation graph validation. Saved-map AMCL must already be active.
+    move_base is explicitly remapped to the RAICOM safety source; no goal is
+    issued by this launch or by RViz.
+  -->
+  <arg name="execution_profile_file"
+       default="$(find raicom_bringup)/config/execution_profiles.json"/>
+  <param name="/raicom/backend" value="SIM"/>
+  <include file="$(find raicom_bringup)/launch/safety.launch">
+    <!-- Gazebo-only final mapping; real.launch never uses this remap. -->
+    <arg name="final_cmd_vel" value="/cmd_vel"/>
+    <arg name="execution_profile_file" value="$(arg execution_profile_file)"/>
+  </include>
+  <node name="raicom_localization_watchdog"
+        pkg="raicom_safety"
+        type="localization_watchdog.py"
+        output="screen">
+    <param name="input_timeout_s" value="0.75"/>
+  </node>
+  <node name="move_base"
+        pkg="move_base"
+        type="move_base"
+        output="screen">
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_common.yaml" ns="global_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_common.yaml" ns="local_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_global_costmap.yaml" ns="global_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_local_costmap.yaml" ns="local_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_move_base.yaml"/>
+    <!-- Profile limits override static planner defaults and are validated by the gate. -->
+    <rosparam command="load" file="$(arg execution_profile_file)"/>
+    <remap from="cmd_vel" to="/raicom/cmd_vel/nav"/>
+    <remap from="odom" to="/odom"/>
+  </node>
+</launch>

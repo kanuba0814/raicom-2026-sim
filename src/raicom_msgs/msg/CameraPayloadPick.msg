@@ -1,0 +1,14 @@
+std_msgs/Header header
+uint64 request_id
+string payload
+string class_name
+string detector
+float32 pixel_center_x
+float32 pixel_center_y
+geometry_msgs/Point surface_point
+geometry_msgs/Vector3 support_normal
+geometry_msgs/Point tcp_pick_point
+float32 quality
+uint32 stable_frames
+bool valid
+string detail

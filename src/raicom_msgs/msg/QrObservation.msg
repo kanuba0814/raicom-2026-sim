@@ -1,0 +1,9 @@
+std_msgs/Header header
+string target_id
+string payload
+geometry_msgs/Pose pose
+string source_camera
+float32 reprojection_error_px
+uint32 stable_frames
+bool valid
+string detail

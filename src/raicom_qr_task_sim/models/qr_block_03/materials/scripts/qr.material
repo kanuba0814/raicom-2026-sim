@@ -1,0 +1,1 @@
+material QrBlock03/texture { technique { pass { texture_unit { texture qr_03.png } } } }

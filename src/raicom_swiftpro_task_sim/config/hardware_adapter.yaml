@@ -1,0 +1,16 @@
+assumption_status: HW_UNVERIFIED
+real_arm:
+  assumption_status: HW_UNVERIFIED
+  enable_real_arm: false
+  implicit_base_frame: swiftpro_real_base
+  # Official driver may poll two sequential legs at 20 Hz for up to 200
+  # iterations each, plus serial handshakes. This is a conservative admission
+  # budget only; the blocking vendor call still cannot be interrupted.
+  official_worst_case_s: 21.0
+  native_units:
+    request_length: mm
+    seam_length: m
+  workspace_m:
+    x_m: {min: 0.0, max: 0.280, assumption_status: SIM_WORKING_ASSUMPTION}
+    y_m: {min: -0.278, max: 0.278, assumption_status: SIM_WORKING_ASSUMPTION}
+    z_m: {min: 0.0, max: 0.130, assumption_status: SIM_WORKING_ASSUMPTION}

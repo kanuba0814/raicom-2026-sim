@@ -1,0 +1,40 @@
+# Simulation-only occupancy-grid mapping profile.
+# Local raster bounds are not competition-field coordinates or calibration.
+metadata:
+  profile: official_world_sim_mapping
+  status: WORKING_ASSUMPTION
+  verification_level: SIM_TESTED
+  scope: SIM_ONLY
+  world_identifier: reinovo_2026_oryxbot.world
+  purpose: "Generate a development occupancy grid from the official simulation lidar."
+
+# Private parameters accepted by the raicom_sim_gmapping node.
+base_frame: base_footprint
+odom_frame: odom
+map_frame: map
+map_update_interval: 0.5
+maxUrange: 4.8
+linearUpdate: 0.1
+angularUpdate: 0.1
+particles: 30
+# Expanded run-local raster prevents lidar evidence from touching the map edge.
+# These bounds are SIM_ONLY mapper storage, not official field coordinates.
+xmin: -8.0
+ymin: -8.0
+xmax: 8.0
+ymax: 8.0
+delta: 0.05
+minimumScore: 30
+srr: 0.05
+srt: 0.1
+str: 0.05
+stt: 0.1
+
+# Private parameters accepted by the explicit sim_mapping_sweep node only.
+angular_speed_rad_s: 0.15
+duration_s: 42.0
+publish_hz: 10.0
+mode_request_timeout_s: 5.0
+maximum_angular_speed_rad_s: 0.2
+maximum_duration_s: 60.0
+completion_soft_estop: true

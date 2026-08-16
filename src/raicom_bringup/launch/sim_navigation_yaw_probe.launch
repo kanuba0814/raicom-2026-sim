@@ -1,0 +1,9 @@
+<launch>
+  <!-- Started only by the explicit confirmed raicomctl SIM_ONLY probe. -->
+  <node name="raicom_sim_navigation_yaw_probe"
+        pkg="raicom_bringup"
+        type="sim_navigation_yaw_probe.py"
+        output="screen">
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_probe.yaml"/>
+  </node>
+</launch>

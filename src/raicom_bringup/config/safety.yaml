@@ -1,0 +1,16 @@
+# Phase 2 command-gate defaults. All velocity sources are denied on stale input.
+command_timeout_s: 0.35
+mode_timeout_s: 1.0
+localization_timeout_s: 1.0
+publish_hz: 20.0
+# Conservative SIM validation envelope. These are safety ceilings, not planner
+# targets or real-hardware limits. REAL remains inactive and requires a separate
+# Hardware Contract Check before any explicit remap.
+max_abs_linear_x: 0.20
+# Fail-closed default: lateral motion requires an explicit SIM_ONLY launch override.
+max_abs_linear_y: 0.0
+max_planar_speed: 0.20
+max_abs_angular_z: 0.40
+# Do not remap this default to a physical base. Real activation requires the
+# Hardware Contract Check and explicit reviewed remapping.
+output_topic: /raicom/cmd_vel/final

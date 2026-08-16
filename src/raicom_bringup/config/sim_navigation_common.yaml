@@ -1,0 +1,24 @@
+# SIM_ONLY costmap assumptions; not real robot calibration or field geometry.
+metadata:
+  status: WORKING_ASSUMPTION
+  scope: SIM_ONLY
+footprint: [[0.24, 0.20], [0.24, -0.20], [-0.24, -0.20], [-0.24, 0.20]]
+obstacle_layer:
+  enabled: true
+  obstacle_range: 3.5
+  raytrace_range: 4.0
+  observation_sources: fuse_scan
+  fuse_scan:
+    data_type: LaserScan
+    topic: /fuse_scan
+    marking: true
+    clearing: true
+    min_obstacle_height: 0.0
+    max_obstacle_height: 0.4
+    obstacle_range: 3.5
+    raytrace_range: 4.0
+inflation_layer:
+  enabled: true
+  cost_scaling_factor: 8.0
+  # Footprint circumscribed radius is about 0.312 m; keep obstacle inflation beyond it.
+  inflation_radius: 0.36

@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.0.2)
+project(raicom_qr_task_sim)
+find_package(catkin REQUIRED COMPONENTS gazebo_msgs geometry_msgs raicom_msgs rospy sensor_msgs tf2_ros)
+catkin_python_setup()
+catkin_package(CATKIN_DEPENDS gazebo_msgs geometry_msgs raicom_msgs rospy sensor_msgs tf2_ros)
+catkin_install_python(PROGRAMS scripts/scene_spawner.py scripts/qr_camera_detector.py scripts/qr_2x2_oracle.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(DIRECTORY config launch models DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})

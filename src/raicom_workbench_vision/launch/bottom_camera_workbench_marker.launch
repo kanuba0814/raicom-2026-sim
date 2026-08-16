@@ -1,0 +1,20 @@
+<launch>
+  <!-- SIM_WORKING_ASSUMPTION detector for base fine alignment; observation only. -->
+  <arg name="camera_image" default="/bottom_camera/image_raw"/>
+  <arg name="camera_info" default="/bottom_camera/camera_info"/>
+  <arg name="output_frame" default="base_link"/>
+  <arg name="marker_topic" default="/raicom/workbench/markers"/>
+  <arg name="marker_size_cm" default="5.0"/>
+  <arg name="detector_name" default="workbench_alvar_detector"/>
+
+  <node pkg="ar_track_alvar" type="individualMarkersNoKinect"
+        name="$(arg detector_name)" output="screen">
+    <param name="marker_size" value="$(arg marker_size_cm)"/>
+    <param name="max_new_marker_error" value="0.08"/>
+    <param name="max_track_error" value="0.2"/>
+    <param name="output_frame" value="$(arg output_frame)"/>
+    <remap from="camera_image" to="$(arg camera_image)"/>
+    <remap from="camera_info" to="$(arg camera_info)"/>
+    <remap from="ar_pose_marker" to="$(arg marker_topic)"/>
+  </node>
+</launch>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <!-- Team-owned SIM overlay. Visual/material assets remain the official model. -->
+  <model name="raicom_sim_charge_pile">
+    <static>true</static>
+    <link name="pile">
+      <visual name="body_visual">
+        <pose>0.002297 -0.003336 0.045 0 0 0</pose>
+        <geometry><box><size>0.05 0.12 0.09</size></box></geometry>
+        <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/White</name></script></material>
+      </visual>
+      <collision name="body_collision">
+        <pose>0.002297 -0.003336 0.045 0 0 0</pose>
+        <geometry><box><size>0.05 0.12 0.09</size></box></geometry>
+      </collision>
+      <visual name="ar0_visual">
+        <pose>0.028 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.0001 0.05 0.05</size></box></geometry>
+        <material>
+          <script>
+            <uri>model://small_marker_charge_pile/materials/textures</uri>
+            <uri>model://small_marker_charge_pile/materials/scripts</uri>
+            <name>reinovo/ar_track_1</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <!-- Dedicated SIM contact pad at charge-port height; not physical-current evidence. -->
+    <link name="charging_contact_pad">
+      <pose>0.030 0 0.012 0 0 0</pose>
+      <collision name="collision">
+        <geometry><box><size>0.004 0.028 0.012</size></box></geometry>
+        <surface><contact><collide_without_contact>0</collide_without_contact></contact></surface>
+      </collision>
+      <sensor name="charging_contact_sensor" type="contact">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <contact><collision>collision</collision></contact>
+        <plugin name="charging_contact_bridge" filename="libgazebo_ros_bumper.so">
+          <bumperTopicName>/raicom/charging/contact_states</bumperTopicName>
+          <frameName>world</frameName>
+        </plugin>
+      </sensor>
+    </link>
+    <joint name="charging_contact_pad_joint" type="fixed">
+      <parent>pile</parent><child>charging_contact_pad</child>
+    </joint>
+  </model>
+</sdf>

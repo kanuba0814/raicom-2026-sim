@@ -1,0 +1,84 @@
+<launch>
+  <!--
+    This is deliberately a GUI-only baseline.  Do not add a headless switch to
+    the operator entry point: both Gazebo's gzclient and RViz are required.
+  -->
+  <arg name="world_name" default="$(find oryxbot_description)/world/reinovo_2026_oryxbot.world" />
+  <arg name="robot_x" default="0.0" />
+  <arg name="robot_y" default="0.0" />
+  <arg name="robot_yaw" default="1.57" />
+
+  <param name="use_sim_time" value="true" />
+
+  <!-- Robot Context is read-only and belongs to the actual GUI baseline.
+       Localization and Gazebo ground truth remain separate sources; missing
+       optional topics are reported as MISSING rather than blocking startup. -->
+  <include file="$(find raicom_state_server)/launch/state_server.launch" />
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)" />
+    <arg name="paused" value="false" />
+    <arg name="use_sim_time" value="true" />
+    <arg name="gui" value="true" />
+    <arg name="headless" value="false" />
+    <arg name="verbose" value="true" />
+  </include>
+
+  <param name="robot_description"
+         command="$(find xacro)/xacro $(find oryxbot_description)/xacro/oryxbot.xacro sim:=1" />
+
+  <!-- Wait for model_states before spawning.  This avoids gazebo_ros's
+       immediate post-request race, where spawn_model can report a timeout even
+       though Gazebo subsequently inserts the entity. -->
+  <node name="spawn_oryxbot"
+        pkg="raicom_2026_sim"
+        type="spawn_oryxbot.py"
+        output="screen">
+    <param name="model_name" value="oryxbot" />
+    <param name="robot_namespace" value="/" />
+    <param name="x" value="$(arg robot_x)" />
+    <param name="y" value="$(arg robot_y)" />
+    <param name="z" value="0.05" />
+    <param name="yaw" value="$(arg robot_yaw)" />
+    <param name="spawn_timeout" value="60.0" />
+  </node>
+
+  <!-- The official robot xacro contains gazebo_ros_control transmissions and
+       the vacuum plugin.  Load its supplied controllers instead of publishing
+       conflicting synthetic joint states.  This is a visual/control baseline,
+       not a legacy autonomous task runner. -->
+  <rosparam command="load"
+            file="$(find oryxbot_description)/config/arm_controllers.yaml" />
+
+  <node name="swiftpro_controller_spawner"
+        pkg="controller_manager"
+        type="spawner"
+        ns="/swiftpro"
+        args="--timeout 60 joint_state_controller joint1_position_controller joint2_position_controller joint3_position_controller joint4_position_controller joint5_position_controller joint6_position_controller joint7_position_controller joint8_position_controller joint9_position_controller virtual_end_position_controller"
+        output="screen" />
+
+  <node name="robot_state_publisher"
+        pkg="robot_state_publisher"
+        type="robot_state_publisher"
+        output="screen">
+    <remap from="joint_states" to="/swiftpro/joint_states" />
+  </node>
+
+  <!-- Publish the official-attachment floor texture as a translucent,
+       non-authoritative RViz reference.  Live SLAM remains /map; this marker
+       exists only to let the operator inspect their overlap. -->
+  <node name="raicom_red_blue_field_texture"
+        pkg="raicom_2026_sim"
+        type="red_blue_field_texture.py"
+        output="screen">
+    <rosparam command="load"
+              file="$(find raicom_2026_sim)/config/red_blue_boundary_visualization.yaml" />
+  </node>
+
+  <node name="rviz"
+        pkg="rviz"
+        type="rviz"
+        args="-d $(find raicom_2026_sim)/rviz/raicom_2026_gui.rviz"
+        output="screen"
+        required="true" />
+</launch>

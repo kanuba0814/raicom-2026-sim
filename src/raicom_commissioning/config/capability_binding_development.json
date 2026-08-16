@@ -1,0 +1,41 @@
+{
+  "schema_version": "raicom.capability-binding/v2",
+  "profile_id": "mixed-development-non-actuating",
+  "config_digest": "4a6cff4069c530255e7ca7f8fd9607c1f63436938d0da9039d49c331015a58cd",
+  "safety_policy_ref": "safety-gate-sim-development",
+  "capabilities": {
+    "navigation_replay": {
+      "adapter_id": "navigation-replay-v1",
+      "adapter_digest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "source": "REPLAY",
+      "execution_mode": "REPLAY",
+      "verification_ref": "replay-navigation-fixture",
+      "deadlines": {
+        "operation_seconds": 30,
+        "cancel_seconds": 5
+      },
+      "freshness_policy": {
+        "max_age_seconds": 86400
+      }
+    },
+    "manipulation_dry_run": {
+      "adapter_id": "manipulation-dry-run-v1",
+      "adapter_digest": "2222222222222222222222222222222222222222222222222222222222222222",
+      "source": "FAKE",
+      "execution_mode": "DRY_RUN",
+      "verification_ref": "dry-run-manipulation-fixture",
+      "deadlines": {
+        "operation_seconds": 30,
+        "cancel_seconds": 5
+      },
+      "freshness_policy": {
+        "max_age_seconds": 86400
+      }
+    }
+  },
+  "safety_policy": {
+    "policy_id": "safety-gate-sim-development",
+    "version": "v1",
+    "digest": "3333333333333333333333333333333333333333333333333333333333333333"
+  }
+}

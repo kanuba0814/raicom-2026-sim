@@ -1,0 +1,18 @@
+<launch>
+  <!-- Read-only field aid: overlay the incoming live /map with the
+       official-attachment floor texture.  It starts no localization or motion
+       node and the texture is not an authoritative real-field map. -->
+  <node name="raicom_field_reference_texture"
+        pkg="raicom_2026_sim"
+        type="red_blue_field_texture.py"
+        output="screen">
+    <rosparam command="load"
+              file="$(find raicom_2026_sim)/config/red_blue_boundary_visualization.yaml" />
+  </node>
+  <node name="raicom_field_overlay_rviz"
+        pkg="rviz"
+        type="rviz"
+        args="-d $(find raicom_2026_sim)/rviz/raicom_2026_gui.rviz"
+        output="screen"
+        required="true" />
+</launch>

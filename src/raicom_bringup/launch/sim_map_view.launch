@@ -1,0 +1,18 @@
+<launch>
+  <!--
+    Read-only visual replay of one SIM_ONLY occupancy-grid artifact. The static
+    map->odom identity is a visualization convenience for this saved simulator
+    map only; it is not a localization result or real-field calibration.
+  -->
+  <arg name="map_file"/>
+  <node name="raicom_sim_map_server"
+        pkg="map_server"
+        type="map_server"
+        args="$(arg map_file)"
+        output="screen"/>
+  <node name="raicom_sim_map_to_odom_visualization"
+        pkg="tf"
+        type="static_transform_publisher"
+        args="0 0 0 0 0 0 map odom 20"
+        output="screen"/>
+</launch>

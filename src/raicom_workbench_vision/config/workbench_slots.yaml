@@ -1,0 +1,29 @@
+# SIM_WORKING_ASSUMPTION: IDs, offsets, and view are simulation calibration only,
+# not competition facts. Validate against the current simulated scene before use.
+marker_ids: {top: 100, bottom: 101}
+output_frame: base_link
+stale_after_s: 0.5
+max_marker_skew_s: 0.05
+quaternion_norm_tolerance: 0.02
+min_separation_m: 0.05
+max_separation_m: 0.50
+max_normal_disagreement_rad: 0.35
+# Output-frame anchor resolves otherwise ambiguous marker normal signs.
+marker_normal_axis: [0.0, 0.0, 1.0]
+expected_normal_in_output_frame: [0.0, 0.0, 1.0]
+min_normal_anchor_dot: 0.5
+max_baseline_normal_ratio: 0.2
+required_stable_frames: 5
+max_slot_translation_delta_m: 0.003
+max_surface_angle_delta_rad: 0.035
+surface_offset_m: 0.0
+# Fixed publication order is slot IDs 1, 2, 3, 4. SIM_WORKING_ASSUMPTION:
+# offsets are the painted number-circle centers recovered from the current
+# official SIM workbench texture and top-face Collada UV mapping. They are not
+# competition coordinates; venue operation must regenerate them from the
+# actual AR/hand-eye calibration and observed placement marks.
+slots:
+  - {id: 1, left_m: -0.141864, down_m: 0.075089}
+  - {id: 2, left_m: -0.141799, down_m: 0.017268}
+  - {id: 3, left_m: -0.084085, down_m: 0.075154}
+  - {id: 4, left_m: -0.084020, down_m: 0.017332}

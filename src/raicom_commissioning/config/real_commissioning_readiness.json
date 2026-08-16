@@ -1,0 +1,17 @@
+{
+  "schema_version": "raicom.real-commissioning-readiness/v1",
+  "source_environment": "REAL_UNRESOLVED",
+  "profile": {
+    "scope": "REAL_UNRESOLVED"
+  },
+  "hardware": {},
+  "contracts": {},
+  "calibration": {
+    "status": "UNRESOLVED"
+  },
+  "grasp": {
+    "format": "UNSTRUCTURED",
+    "fresh": false
+  },
+  "safety": {}
+}

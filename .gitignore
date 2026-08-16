@@ -1,0 +1,22 @@
+# Locally extracted official technical attachment; source ZIP remains outside Git.
+/assets/
+
+# Docker/container ROS build and runtime state.
+/build/
+/devel/
+/logs/
+/.ros/
+/runs/
+/.catkin_workspace
+/src/CMakeLists.txt
+**/__pycache__/
+
+# Generated compatibility links and the selected local camera profile overlay.
+/src/oryxbot_description/config
+/src/oryxbot_description/include
+/src/oryxbot_description/launch
+/src/oryxbot_description/meshes
+/src/oryxbot_description/srv
+/src/oryxbot_description/world
+/src/oryxbot_description/urdf.rviz
+/src/oryxbot_description/xacro/

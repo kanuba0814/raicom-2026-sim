@@ -1,0 +1,52 @@
+<launch>
+  <!--
+    Stationary SIM_ONLY live-SLAM navigation integration. GMapping is the sole
+    map->odom authority; no AMCL or uncontrolled motion producer starts here.
+    The frontier coordinator is opt-in and move_base can only reach Gazebo
+    through the existing safety gate.
+  -->
+  <arg name="frontier_survey" default="false"/>
+  <arg name="frontier_max_goals" default="4"/>
+  <arg name="frontier_overall_timeout_s" default="180.0"/>
+  <arg name="frontier_goal_timeout_s" default="30.0"/>
+  <param name="/raicom/backend" value="SIM"/>
+  <include file="$(find raicom_bringup)/launch/safety.launch">
+    <arg name="final_cmd_vel" value="/cmd_vel"/>
+    <arg name="execution_profile_file"
+         value="$(find raicom_bringup)/config/execution_profiles.json"/>
+  </include>
+  <include file="$(find raicom_bringup)/launch/sim_mapping.launch"/>
+  <node name="raicom_slam_health_watchdog"
+        pkg="raicom_safety"
+        type="slam_health_watchdog.py"
+        output="screen">
+    <param name="input_timeout_s" value="3.0"/>
+  </node>
+  <node name="move_base"
+        pkg="move_base"
+        type="move_base"
+        output="screen">
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_common.yaml" ns="global_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_common.yaml" ns="local_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_global_costmap.yaml" ns="global_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_local_costmap.yaml" ns="local_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_move_base.yaml"/>
+    <remap from="cmd_vel" to="/raicom/cmd_vel/nav"/>
+    <remap from="odom" to="/odom"/>
+  </node>
+  <!-- Opt-in only: the normal graph remains stationary. -->
+  <node if="$(arg frontier_survey)"
+        name="raicom_sim_frontier_survey"
+        pkg="raicom_bringup"
+        type="sim_frontier_survey.py"
+        output="screen">
+    <param name="max_goals" value="$(arg frontier_max_goals)"/>
+    <param name="goal_timeout_s" value="$(arg frontier_goal_timeout_s)"/>
+    <param name="overall_timeout_s" value="$(arg frontier_overall_timeout_s)"/>
+    <param name="gate_timeout_s" value="10.0"/>
+    <!-- 0.312 m footprint circumscribed radius plus conservative margin. -->
+    <param name="inflation_radius_m" value="0.36"/>
+    <param name="edge_margin_m" value="0.36"/>
+    <param name="standoff_m" value="0.40"/>
+  </node>
+</launch>

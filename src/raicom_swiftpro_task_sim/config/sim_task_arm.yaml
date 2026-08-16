@@ -1,0 +1,64 @@
+assumption_status: SIM_WORKING_ASSUMPTION
+scope:
+  value: SIM-only task/vision kinematics; not a competition coordinate system, hardware calibration, or execution authority.
+  assumption_status: SIM_WORKING_ASSUMPTION
+units:
+  length: {value: m, assumption_status: SIM_WORKING_ASSUMPTION}
+  angle: {value: rad, assumption_status: SIM_WORKING_ASSUMPTION}
+  time: {value: s, assumption_status: SIM_WORKING_ASSUMPTION}
+frames:
+  base: {value: swiftpro_sim_base, assumption_status: SIM_WORKING_ASSUMPTION}
+  end_effector: {value: swiftpro_sim_end_effector, assumption_status: SIM_WORKING_ASSUMPTION}
+  camera: {value: swiftpro_sim_camera, assumption_status: SIM_WORKING_ASSUMPTION}
+geometry:
+  lower_arm_m: {value: 0.14207, assumption_status: SIM_WORKING_ASSUMPTION}
+  upper_arm_m: {value: 0.15881, assumption_status: SIM_WORKING_ASSUMPTION}
+  radial_offset_m: {value: 0.06975, assumption_status: SIM_WORKING_ASSUMPTION}
+  base_height_m: {value: 0.10660, assumption_status: SIM_WORKING_ASSUMPTION}
+  tool_z_offset_m: {value: 0.07455, assumption_status: SIM_WORKING_ASSUMPTION}
+workspace:
+  x_m: {min: 0.0, max: 0.280, assumption_status: SIM_WORKING_ASSUMPTION}
+  y_m: {min: -0.278, max: 0.278, assumption_status: SIM_WORKING_ASSUMPTION}
+  z_m: {min: 0.0, max: 0.130, assumption_status: SIM_WORKING_ASSUMPTION}
+independent_joint_limits_rad:
+  joint1: {min: 0.0, max: 3.490658503988659, assumption_status: SIM_WORKING_ASSUMPTION}
+  joint2: {min: 0.0, max: 2.356194490192345, assumption_status: SIM_WORKING_ASSUMPTION}
+  joint6: {min: 0.0, max: 1.7453292519943295, assumption_status: SIM_WORKING_ASSUMPTION}
+slot_pick_place:
+  # Bench-local slot geometry is supplied by /raicom/workbench/slots. Heights
+  # below are arm-base-frame SIM values, not world or per-bench coordinates.
+  observation_height_m: {value: 0.120, assumption_status: SIM_WORKING_ASSUMPTION}
+  grasp_height_m: {value: 0.040, assumption_status: SIM_WORKING_ASSUMPTION}
+  place_height_m: {value: 0.040, assumption_status: SIM_WORKING_ASSUMPTION}
+  source_slot_index: {value: 0, assumption_status: SIM_WORKING_ASSUMPTION}
+  placement_slot_indices: {value: [1, 2], assumption_status: SIM_WORKING_ASSUMPTION}
+thresholds:
+  observation_max_age_s: {value: 0.25, assumption_status: SIM_WORKING_ASSUMPTION}
+  settle_position_error_m: {value: 0.002, assumption_status: SIM_WORKING_ASSUMPTION}
+  # Display-joint feedback tolerances for the explicit SIM motion adapter.
+  settle_position_error_rad: {value: 0.02, assumption_status: SIM_WORKING_ASSUMPTION}
+  settle_velocity_rad_s: {value: 0.02, assumption_status: SIM_WORKING_ASSUMPTION}
+  settle_window_s: {value: 1.5, assumption_status: SIM_WORKING_ASSUMPTION}
+  # Generic SIM conditioning floor; not tied to a station or competition slot.
+  fold_min_elbow_rad: {value: 0.52, assumption_status: SIM_WORKING_ASSUMPTION}
+  fold_min_margin_m: {value: 0.040, assumption_status: SIM_WORKING_ASSUMPTION}
+upstream_projection_fixtures:
+  assumption_status: SIM_WORKING_ASSUMPTION
+  provenance:
+    assumption_status: SIM_WORKING_ASSUMPTION
+    source_path: vendor_upstream/oryxbot_ws/src/oryxbot_description/include/forward_kinematics.hh
+    source_sha256: 1c82f3aceefff2f2e3095a47a7980c972a673559f8891d355a0c9ff9689da42c
+    generated_from: "forward_kinematics(angle[3]) display-joint assignments; input/output degrees"
+  cases:
+    - assumption_status: SIM_WORKING_ASSUMPTION
+      input_degrees: [90.0, 60.0, 50.0]
+      output_degrees: [0.0, 30.0, 20.09, -30.0, 30.0, 46.2, -16.2, -50.09, 50.04]
+    - assumption_status: SIM_WORKING_ASSUMPTION
+      input_degrees: [70.0, 75.0, 45.0]
+      output_degrees: [-20.0, 15.0, 30.09, -15.0, 15.0, 41.2, -26.2, -45.09, 45.04]
+    - assumption_status: SIM_WORKING_ASSUMPTION
+      input_degrees: [110.0, 70.0, 40.0]
+      output_degrees: [20.0, 20.0, 20.09, -20.0, 20.0, 36.2, -16.2, -40.09, 40.04]
+    - assumption_status: SIM_WORKING_ASSUMPTION
+      input_degrees: [90.0, 80.0, 30.0]
+      output_degrees: [0.0, 10.0, 20.09, -10.0, 10.0, 26.2, -16.2, -30.09, 30.04]

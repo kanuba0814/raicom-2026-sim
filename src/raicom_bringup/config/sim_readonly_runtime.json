@@ -1,0 +1,26 @@
+{
+  "profile": "SIM_DEVELOPMENT_READONLY",
+  "settlement_threshold": 0,
+  "snapshot_rate_hz": 1.0,
+  "replay": {
+    "class_mapping": {"development_block": "development_block"},
+    "minimum_confidence": 0.0,
+    "minimum_stability": 1.0,
+    "required_consecutive_frames": 1,
+    "maximum_frame_age_s": 1.0,
+    "model_path": "",
+    "model_sha256": "",
+    "model_verification": "NOT_FIELD_VALIDATED"
+  },
+  "turntable": {
+    "max_observation_age_s": 0.5,
+    "required_execution_budget_s": 0.2,
+    "max_time_to_exit_s": 1.0
+  },
+  "recovery": {
+    "navigation_retries": 0,
+    "reobserve_attempts": 0,
+    "charge_retries": 0,
+    "action_timeout_s": 1.0
+  }
+}

@@ -1,0 +1,9 @@
+<launch>
+  <!-- Started only by the explicit raicomctl simulator mapping command. -->
+  <node name="raicom_sim_mapping_sweep"
+        pkg="raicom_bringup"
+        type="sim_mapping_sweep.py"
+        output="screen">
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_mapping.yaml"/>
+  </node>
+</launch>

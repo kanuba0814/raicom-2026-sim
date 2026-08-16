@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>raicom_workbench_vision</name>
+  <version>0.1.0</version>
+  <description>Passive camera-only workbench slot localization and camera overlay.</description>
+  <maintainer email="raicom@example.invalid">RAICOM 2026</maintainer>
+  <license>BSD-3-Clause</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>ar_track_alvar_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>geometry_msgs</depend>
+  <depend>raicom_msgs</depend>
+  <depend>rospy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>tf</depend>
+  <exec_depend>ar_track_alvar</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <test_depend>python3-nose</test_depend>
+</package>

@@ -1,0 +1,12 @@
+<launch>
+  <!-- This launch must not activate motion: hardware readiness is not implemented. -->
+  <arg name="site_calibration" default=""/>
+  <param name="/raicom/backend" value="REAL"/>
+  <param name="/raicom/site_calibration" value="$(arg site_calibration)"/>
+  <param name="/raicom/real_active" value="false"/>
+  <!-- REAL_UNRESOLVED is deliberately non-activatable; no physical remap exists. -->
+  <include file="$(find raicom_bringup)/launch/safety.launch">
+    <arg name="execution_profile_file"
+         value="$(find raicom_bringup)/config/execution_profiles_real_unresolved.json"/>
+  </include>
+</launch>

@@ -1,0 +1,10 @@
+# Explicit SIM_ONLY move_base yaw-probe profile.
+# Position comes from the live AMCL pose; no field waypoint is encoded here.
+metadata:
+  status: WORKING_ASSUMPTION
+  scope: SIM_ONLY
+  purpose: "Validate the safety-gated move_base yaw-control path without a field coordinate."
+yaw_delta_rad: 0.25
+maximum_abs_yaw_delta_rad: 0.35
+server_timeout_s: 5.0
+result_timeout_s: 15.0

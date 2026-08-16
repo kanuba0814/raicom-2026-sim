@@ -1,0 +1,10 @@
+<launch>
+  <!-- Explicit opt-in: one semantic readonly snapshot publisher, no command interfaces. -->
+  <arg name="enabled" default="false" />
+  <arg name="artifact_root" default="" />
+  <arg name="config" default="$(find raicom_bringup)/config/sim_readonly_runtime.json" />
+  <group if="$(arg enabled)">
+    <node pkg="raicom_bringup" type="sim_readonly_runtime.py" name="sim_readonly_runtime" output="screen"
+          args="--artifact-root $(arg artifact_root) --config $(arg config)" />
+  </group>
+</launch>

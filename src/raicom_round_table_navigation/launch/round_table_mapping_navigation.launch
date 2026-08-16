@@ -1,0 +1,33 @@
+<launch>
+  <!--
+    SIM_ONLY stationary graph. GMapping alone owns /map and map->odom. The team
+    mask is remapped to a separate topic and only consumed by costmaps/guards.
+    No goal or docking command is issued by this launch.
+  -->
+  <arg name="team_boundary_map_file"/>
+  <param name="/raicom/backend" value="SIM"/>
+  <include file="$(find raicom_bringup)/launch/safety.launch">
+    <arg name="final_cmd_vel" value="/cmd_vel"/>
+    <arg name="execution_profile_file" value="$(find raicom_bringup)/config/execution_profiles.json"/>
+  </include>
+  <include file="$(find raicom_bringup)/launch/sim_mapping.launch"/>
+  <node name="raicom_slam_health_watchdog" pkg="raicom_safety"
+        type="slam_health_watchdog.py" output="screen">
+    <param name="input_timeout_s" value="3.0"/>
+  </node>
+  <node pkg="map_server" type="map_server" name="raicom_team_boundary_map_server"
+        args="$(arg team_boundary_map_file)" output="screen">
+    <remap from="map" to="/raicom/team_boundary_mask"/>
+    <remap from="map_metadata" to="/raicom/team_boundary_mask_metadata"/>
+    <remap from="static_map" to="/raicom/team_boundary_static_map"/>
+  </node>
+  <node name="move_base" pkg="move_base" type="move_base" output="screen">
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_common.yaml" ns="global_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_common.yaml" ns="local_costmap"/>
+    <rosparam command="load" file="$(find raicom_round_table_navigation)/config/round_table_global_costmap.yaml" ns="global_costmap"/>
+    <rosparam command="load" file="$(find raicom_round_table_navigation)/config/round_table_local_costmap.yaml" ns="local_costmap"/>
+    <rosparam command="load" file="$(find raicom_bringup)/config/sim_navigation_move_base.yaml"/>
+    <remap from="cmd_vel" to="/raicom/cmd_vel/nav"/>
+    <remap from="odom" to="/odom"/>
+  </node>
+</launch>

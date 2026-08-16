@@ -1,0 +1,19 @@
+# Current user-accepted placement height. In venue operation the AR/hand-eye
+# chain supplies the workbench surface pose; only this relative clearance is
+# transferred. Gazebo world Z and the SIM Base.z reference are diagnostics.
+assumption_status: SIM_WORKING_ASSUMPTION
+profile_name: current_verified_place
+surface_clearance_m: 0.02578
+height_axis: workbench_outward_normal
+runtime_surface_authority: AR_HAND_EYE
+# Historical SIM diagnostics are retained only as reference, never runtime control.
+reference_sim_measurement:
+  sim_vision_surface_correction_m: 0.099066
+  sim_effective_normal_offset_m: 0.122734
+  assumption_status: SIM_WORKING_ASSUMPTION
+  workbench_top_world_z_m: 0.242000
+  held_tip_world_z_m: 0.26777749
+  observation_tip_world_z_m: 0.36673885
+  observation_to_place_descent_m: 0.09896136
+  held_tcp_base_z_m: 0.06449394
+  gazebo_runtime_control_authority: false

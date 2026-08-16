@@ -1,0 +1,16 @@
+<launch>
+  <!-- A caller must select an explicit validated execution profile. -->
+  <arg name="execution_profile_file" default=""/>
+  <arg name="final_cmd_vel" default="/raicom/cmd_vel/final"/>
+  <node name="raicom_mode_manager"
+        pkg="raicom_core"
+        type="mode_manager.py"
+        output="screen" />
+  <node name="raicom_cmd_vel_gate"
+        pkg="raicom_safety"
+        type="cmd_vel_gate.py"
+        output="screen">
+    <rosparam command="load" file="$(arg execution_profile_file)"/>
+    <param name="output_topic" value="$(arg final_cmd_vel)"/>
+  </node>
+</launch>

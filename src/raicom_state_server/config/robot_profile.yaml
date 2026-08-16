@@ -1,0 +1,23 @@
+# SIM profile only. Hardware topic/frame names require a real Hardware Contract check.
+history_seconds: 90
+freshness:
+  odom_ms: 300
+  localization_ms: 1000
+  gazebo_ground_truth_ms: 300
+  tf_ms: 300
+  mission_ms: 1000
+  arm_ms: 500
+gazebo_model_name: oryxbot
+topics:
+  odom: /odom
+  localization: /amcl_pose
+  gazebo_ground_truth: /gazebo/model_states
+  cmd_vel: /cmd_vel
+  mission: /raicom/mission/state
+  mission_snapshot: /raicom/mission/snapshot
+  mode: /raicom/mode
+  safety_paused: /raicom/safety/paused
+frames:
+  map: map
+  odom: odom
+  base: base_link

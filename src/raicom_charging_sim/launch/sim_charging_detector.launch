@@ -1,0 +1,11 @@
+<launch>
+  <!-- Reuse the workbench observation-only detector with a dedicated node/topic. -->
+  <include file="$(find raicom_workbench_vision)/launch/bottom_camera_workbench_marker.launch">
+    <arg name="detector_name" value="charging_alvar_detector"/>
+    <arg name="camera_image" value="/bottom_camera/image_raw"/>
+    <arg name="camera_info" value="/bottom_camera/camera_info"/>
+    <arg name="output_frame" value="base_link"/>
+    <arg name="marker_topic" value="/raicom/charging/markers"/>
+    <arg name="marker_size_cm" value="5.0"/>
+  </include>
+</launch>

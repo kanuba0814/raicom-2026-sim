@@ -1,0 +1,58 @@
+# Canonical SIM_ONLY dock profile. Never copy these values into REAL calibration.
+metadata:
+  schema: 2
+  scope: SIM_ONLY
+  assumption_status: SIM_WORKING_ASSUMPTION
+  source: "Official small_marker_charge_pile asset; R260812 detail reference for AR id 0 / 5 cm only."
+  asset: small_marker_charge_pile
+  physical_charge_confirmed: false
+dock:
+  station_id: sim_charge_pile
+  model_name: raicom_sim_charge_pile
+  # Gazebo spawn service consumes world coordinates. This is only a SIM seed.
+  pose: {frame: world, x_m: 1.30, y_m: 0.45, yaw_rad: 0.0, status: SIM_WORKING_ASSUMPTION}
+  front_axis: +X
+  approach_normal: +X
+  # map-frame move_base goal: robot lies on dock +X side and faces dock -X.
+  pre_dock_pose: {frame: map, x_m: 1.75, y_m: 0.45, yaw_rad: 3.141592653589793, status: SIM_WORKING_ASSUMPTION}
+# Simple handoff gate: named move_base coarse navigation must finish within
+# these SIM-only errors before the AR detector may take over for fine docking.
+# A failure stays stopped and asks the operator to inspect/recalibrate in RViz.
+orchestration:
+  coarse_xy_tolerance_m: 0.20
+  coarse_yaw_tolerance_rad: 0.10
+  on_reject: RVIZ_MANUAL_CALIBRATION_REQUIRED
+ar_target:
+  marker_id: 0
+  marker_size_m: 0.05
+  camera_image: /bottom_camera/image_raw
+  camera_info: /bottom_camera/camera_info
+  markers_topic: /raicom/charging/markers
+  expected_frame: base_link
+  marker_frame_correction_rpy_rad: [-1.5707963267948966, 1.5707963267948966, 0.0]
+  marker_yaw_target_rad: 0.0
+  precontact_standoff_m: 0.23
+  contact_standoff_m: 0.16
+  yaw_tolerance_rad: 0.035
+  lateral_tolerance_m: 0.015
+  distance_tolerance_m: 0.012
+  max_observation_age_s: 0.30
+  stable_samples: 10
+motion:
+  max_align_distance_m: 0.60
+  max_align_linear_speed_mps: 0.04
+  max_lateral_speed_mps: 0.025
+  max_angular_speed_radps: 0.10
+  max_touch_speed_mps: 0.015
+  max_touch_travel_m: 0.09
+  touch_timeout_s: 8.0
+  total_timeout_s: 70.0
+evidence:
+  contact_topic: /raicom/charging/contact_states
+  required_robot_collision: oryxbot::charge_port_link::collision
+  required_pad_collision: raicom_sim_charge_pile::charging_contact_pad::collision
+  contact_dwell_s: 0.50
+  sim_current_dwell_s: 1.0
+  physical_charge_confirmed: false
+session:
+  maximum_attempts: 1

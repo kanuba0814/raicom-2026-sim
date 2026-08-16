@@ -1,0 +1,7 @@
+<launch>
+  <!-- SIM-only fixed scene insertion; no delete/set-model or actuator interfaces. -->
+  <arg name="config" default="$(find raicom_qr_task_sim)/config/qr_2x2_sim.yaml"/>
+  <node pkg="raicom_qr_task_sim" type="scene_spawner.py" name="qr_2x2_scene_spawner" output="screen" required="true">
+    <param name="config" value="$(arg config)"/>
+  </node>
+</launch>

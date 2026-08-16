@@ -1,0 +1,34 @@
+<launch>
+  <!-- SIM-only map identity and team-mask contract; no tangent-line parameters. -->
+  <arg name="team"/>
+  <arg name="team_boundary_map_file"/>
+  <arg name="expected_map_image"/>
+  <arg name="selected_team"/>
+  <arg name="expected_grid_hash"/>
+  <arg name="target_front_gap_m" default="0.03"/>
+  <arg name="completion_gap_min_m" default="0.02"/>
+  <arg name="completion_gap_max_m" default="0.04"/>
+  <arg name="hard_minimum_gap_m" default="0.01"/>
+  <arg name="phase_timeout_s" default="45.0"/>
+  <arg name="enabled" default="false"/>
+  <arg name="start_boundary_server" default="true"/>
+  <node if="$(arg start_boundary_server)" pkg="map_server" type="map_server" name="raicom_team_boundary_map_server"
+        args="$(arg team_boundary_map_file)" output="screen">
+    <remap from="map" to="/raicom/team_boundary_mask"/>
+    <remap from="map_metadata" to="/raicom/team_boundary_mask_metadata"/>
+    <remap from="static_map" to="/raicom/team_boundary_static_map"/>
+  </node>
+  <node pkg="raicom_round_table_navigation" type="round_table_docking_adapter_node.py" name="round_table_docking_adapter" output="screen">
+    <param name="team" value="$(arg team)"/>
+    <param name="expected_map_image" value="$(arg expected_map_image)"/>
+    <param name="selected_team" value="$(arg selected_team)"/>
+    <param name="expected_grid_hash" value="$(arg expected_grid_hash)"/>
+    <param name="target_front_gap_m" value="$(arg target_front_gap_m)"/>
+    <param name="completion_gap_min_m" value="$(arg completion_gap_min_m)"/>
+    <param name="completion_gap_max_m" value="$(arg completion_gap_max_m)"/>
+    <param name="hard_minimum_gap_m" value="$(arg hard_minimum_gap_m)"/>
+    <param name="phase_timeout_s" value="$(arg phase_timeout_s)"/>
+    <param name="map_identity_contract_recorded" value="true"/>
+    <param name="enabled" value="$(arg enabled)"/>
+  </node>
+</launch>

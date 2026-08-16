@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>raicom_platform</name>
+  <version>0.1.0</version>
+  <description>Semantic platform-adapter contract for RAICOM SIM and REAL backends.</description>
+  <maintainer email="raicom@example.invalid">RAICOM 2026</maintainer>
+  <license>BSD-3-Clause</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>raicom_core</exec_depend>
+  <exec_depend>raicom_perception</exec_depend>
+  <exec_depend>tf2_msgs</exec_depend>
+  <exec_depend>actionlib</exec_depend>
+  <exec_depend>move_base_msgs</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <export><build_type>catkin</build_type></export>
+</package>

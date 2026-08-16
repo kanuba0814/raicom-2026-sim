@@ -1,0 +1,26 @@
+<launch>
+  <!--
+    Read-only Phase 4 readiness check. This launch intentionally does not start
+    AMCL, move_base, ar_pose, or relative_move; those candidates currently
+    publish raw cmd_vel and would bypass the RAICOM safety gate.
+  -->
+  <arg name="observation_timeout_s" default="1.0"/>
+
+  <node name="raicom_navigation_contract_probe"
+        pkg="raicom_platform"
+        type="navigation_contract_probe.py"
+        output="screen">
+    <param name="observation_timeout_s" value="$(arg observation_timeout_s)"/>
+    <!-- Candidate graph interfaces only; observing them does not activate them. -->
+    <rosparam param="expected_topics">
+      - /odom
+      - /tf
+      - /tf_static
+      - /move_base/status
+      - /move_base/feedback
+      - /move_base/result
+    </rosparam>
+    <!-- Actual frame names remain subject to a later contract check. -->
+    <rosparam param="expected_frames">[]</rosparam>
+  </node>
+</launch>

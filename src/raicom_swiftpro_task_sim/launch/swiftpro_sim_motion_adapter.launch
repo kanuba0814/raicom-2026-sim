@@ -1,0 +1,10 @@
+<launch>
+  <!-- Disabled unless explicitly included/started by a SIM-only task lane. -->
+  <arg name="enable_sim_motion_adapter" default="false" />
+  <group if="$(arg enable_sim_motion_adapter)">
+    <node pkg="raicom_swiftpro_task_sim"
+          type="swiftpro_sim_motion_adapter.py"
+          name="swiftpro_sim_motion_adapter"
+          output="screen" />
+  </group>
+</launch>

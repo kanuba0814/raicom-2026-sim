@@ -1,0 +1,15 @@
+<launch>
+  <!-- SIM_SAFE is the default only for this explicit SIM entry point. -->
+  <arg name="field_profile" default=""/>
+  <arg name="execution_profile" default="SIM_SAFE"/>
+  <arg name="execution_profile_file"
+       default="$(find raicom_bringup)/config/execution_profiles.json"/>
+  <param name="/raicom/backend" value="SIM"/>
+  <param name="/raicom/field_profile" value="$(arg field_profile)"/>
+  <param name="/raicom/execution_profile" value="$(arg execution_profile)"/>
+  <include file="$(find raicom_bringup)/launch/safety.launch">
+    <arg name="execution_profile_file" value="$(arg execution_profile_file)"/>
+  </include>
+  <!-- Read-only state aggregation; missing topics remain explicit UNKNOWN/MISSING. -->
+  <include file="$(find raicom_state_server)/launch/state_server.launch" />
+</launch>

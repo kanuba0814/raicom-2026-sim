@@ -1,0 +1,42 @@
+# SIM_ONLY AMCL bootstrap profile for the saved official-world occupancy grid.
+# The initial pose is the GUI simulator spawn pose, not a field calibration.
+metadata:
+  profile: official_world_sim_amcl
+  status: WORKING_ASSUMPTION
+  verification_level: SIM_TESTED
+  scope: SIM_ONLY
+  world_identifier: reinovo_2026_oryxbot.world
+  initial_pose_source: "raicom_2026_sim/gui.launch simulator spawn arguments"
+base_frame_id: base_footprint
+odom_frame_id: odom
+global_frame_id: map
+initial_pose_x: 0.0
+initial_pose_y: 0.0
+initial_pose_a: 1.57
+use_map_topic: false
+odom_model_type: omni-corrected
+laser_max_beams: 100
+laser_max_range: 4.8
+min_particles: 100
+max_particles: 500
+kld_err: 0.05
+kld_z: 0.99
+odom_alpha1: 0.04
+odom_alpha2: 0.01
+odom_alpha3: 0.02
+odom_alpha4: 0.01
+odom_alpha5: 0.01
+laser_model_type: likelihood_field
+laser_z_hit: 0.5
+laser_z_short: 0.05
+laser_z_max: 0.05
+laser_z_rand: 0.4
+laser_sigma_hit: 0.2
+laser_lambda_short: 0.1
+laser_likelihood_max_dist: 3.0
+update_min_d: 0.1
+update_min_a: 0.1
+resample_interval: 1
+transform_tolerance: 0.5
+recovery_alpha_slow: 0.0
+recovery_alpha_fast: 0.0

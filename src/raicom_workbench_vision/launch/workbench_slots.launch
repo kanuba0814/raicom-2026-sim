@@ -1,0 +1,8 @@
+<launch>
+  <arg name="marker_topic" default="/ar_pose_marker"/>
+  <arg name="config" default="$(find raicom_workbench_vision)/config/workbench_slots.yaml"/>
+  <node pkg="raicom_workbench_vision" type="workbench_slot_localizer.py" name="workbench_slot_localizer" output="screen">
+    <param name="marker_topic" value="$(arg marker_topic)"/>
+    <param name="config" value="$(arg config)"/>
+  </node>
+</launch>

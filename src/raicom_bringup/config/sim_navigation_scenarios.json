@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "scope": "SIM_ONLY",
+  "assumption_status": "SIM_WORKING_ASSUMPTION",
+  "map_contract": "accepted_sim_map",
+  "note": "Development-only waypoints tied to the accepted SIM occupancy map; not competition-field facts.",
+  "wall_timeout_s": 90,
+  "goal_timeout_s": 35,
+  "waypoints": {
+    "home": {"frame": "map", "x": 0.6755, "y": 1.1588, "yaw": -1.5708},
+    "out": {"frame": "map", "x": 1.3, "y": 2.7, "yaw": -1.5708},
+    "long": {"frame": "map", "x": 4.7, "y": 1.63, "yaw": -1.5708},
+    "sim_charge_pile_pre_dock": {
+      "frame": "map",
+      "x": 1.75,
+      "y": 0.45,
+      "yaw": 3.141592653589793,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "config/field/sim_charging_dock.yaml isolated overlay; robot is on dock +X side facing -X; not official field coordinate"
+    },
+    "blue_workbench_1_approach": {
+      "frame": "map",
+      "x": 0.40,
+      "y": 0.86897,
+      "yaw": 3.14159,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "2026 SIM nested workbench world pose plus accepted occupancy-map plan probe"
+    },
+    "blue_middle_workbench_approach": {
+      "frame": "map",
+      "x": 0.40,
+      "y": 1.82733,
+      "yaw": 3.14159,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "2026 SIM workbench_0 world pose plus accepted occupancy-map plan probe"
+    },
+    "blue_workbench_3_approach": {
+      "frame": "map",
+      "x": 0.40,
+      "y": 2.79639,
+      "yaw": 3.14159,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "2026 SIM nested workbench_1 world pose plus accepted occupancy-map plan probe"
+    },
+    "blue_center_turntable_north_approach": {
+      "frame": "map",
+      "x": 3.27,
+      "y": 2.02,
+      "yaw": 3.14159,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "Gazebo texture center-circle extraction plus blue-team global-costmap plan probe",
+      "contact_policy": "white turntable contact allowed by current-session operator"
+    },
+    "manual_goal_regression": {
+      "frame": "map",
+      "x": 3.80,
+      "y": 2.20,
+      "yaw": 3.14159,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "Known-free blue-team costmap cell used to reproduce RViz manual-goal oscillation"
+    },
+    "blue_round_table_safe_staging": {
+      "frame": "map",
+      "x": 3.08,
+      "y": 2.32,
+      "yaw": 1.5708,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "Historical radial staging retained for regression only; not used by tangent approach"
+    },
+    "blue_round_table_survey_1": {
+      "frame": "map",
+      "x": 2.40,
+      "y": 0.05,
+      "yaw": 0.0,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "Joint live-SLAM and blue-boundary-mask connected free component; lower-corridor survey step"
+    },
+    "blue_round_table_survey_2": {
+      "frame": "map",
+      "x": 3.70,
+      "y": 0.55,
+      "yaw": 0.0,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "Post-survey joint live-SLAM and blue-boundary-mask known-free right corridor"
+    },
+    "blue_round_table_inward_clearance": {
+      "frame": "map",
+      "x": 3.80,
+      "y": 0.55,
+      "yaw": 1.322,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "Move inward from local boundary while preserving current heading before any rotation sweep"
+    },
+    "blue_round_table_boundary_lead_in": {
+      "frame": "map",
+      "x": 3.70,
+      "y": 0.95,
+      "yaw": 1.5708,
+      "assumption_status": "SIM_WORKING_ASSUMPTION",
+      "source": "Independent team-boundary mask plan probe near the central cylinder",
+      "clearance_contract": "Blue-side offset lead-in parallel to the local boundary; qualification must pass before tangent tracking"
+    }
+  },
+  "scenarios": {
+    "sim_charge_pile_pre_dock": ["sim_charge_pile_pre_dock"],
+    "nominal_out_and_return": ["out", "home"],
+    "repeat": ["out", "home", "out", "home"],
+    "cancel_active": ["long"],
+    "estop_active": ["long"],
+    "thin_mission_navigation": ["out"],
+    "blue_workbench_1_approach": ["blue_workbench_1_approach"],
+    "blue_middle_workbench_approach": ["blue_middle_workbench_approach"],
+    "blue_workbench_3_approach": ["blue_workbench_3_approach"],
+    "blue_center_turntable_north_approach": ["blue_center_turntable_north_approach"],
+    "manual_goal_regression": ["manual_goal_regression"],
+    "blue_round_table_safe_staging": ["blue_round_table_safe_staging"],
+    "blue_round_table_survey_1": ["blue_round_table_survey_1"],
+    "blue_round_table_survey_2": ["blue_round_table_survey_2"],
+    "blue_round_table_inward_clearance": ["blue_round_table_inward_clearance"],
+    "blue_round_table_boundary_lead_in": ["blue_round_table_boundary_lead_in"]
+  }
+}

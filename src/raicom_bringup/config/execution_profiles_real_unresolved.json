@@ -1,0 +1,16 @@
+{
+  "name": "REAL_UNRESOLVED",
+  "metadata": {
+    "scope": "REAL_ONLY",
+    "verification": "UNRESOLVED",
+    "provenance": "Physical-base limits and producer contract are not verified; this profile must not be activated."
+  },
+  "expected_producer_hz": null,
+  "stale_timeout_s": null,
+  "controller_hz": null,
+  "planner_limits": null,
+  "gate_limits": null,
+  "mode_timeout_s": null,
+  "localization_timeout_s": null,
+  "publish_hz": null
+}

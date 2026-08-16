@@ -1,0 +1,18 @@
+# SIM-only optional rear destination sequence. Exactly one payload is selected per invocation.
+payloads:
+  SIM_QR_01: {source_slot: 1, rear_slot: 1}
+  SIM_QR_04: {source_slot: 4, rear_slot: 2}
+rear_destinations:
+  1: {hover_base_m: [0.106, 0.191, 0.120], place_base_m: [0.106, 0.191, 0.040]}
+  2: {hover_base_m: [0.106, 0.110, 0.120], place_base_m: [0.106, 0.110, 0.040]}
+home_independent_rad: [1.57079632679, 1.57079632679, 0.06632251158]
+motion:
+  hover_m: 0.040
+  lift_m: 0.040
+  target_age_s: 0.5
+  target_wait_s: 30.0
+  snapshot_max_frames: 90
+  snapshot_required_detections: 3
+  snapshot_max_center_spread_px: 4.0
+  cartesian_waypoint_spacing_m: 0.010
+  vacuum_feedback_timeout_s: 2.0

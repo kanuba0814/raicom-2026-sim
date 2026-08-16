@@ -1,0 +1,38 @@
+# SIM_ONLY visualization of the red/blue regions already marked in the Gazebo
+# technical-baseline texture. This preserves the existing marked geometry in
+# RViz; it does not invent a midpoint divider or enforce referee boundaries.
+metadata:
+  status: WORKING_ASSUMPTION
+  scope: SIM_ONLY
+  source: official Gazebo technical baseline texture
+  gazebo_texture_contains_red_blue_markings: true
+  authoritative_referee_boundary: false
+  collision_enforcement: false
+  navigation_mask_generated_from_texture: true
+
+navigation_masks:
+  status: WORKING_ASSUMPTION
+  active_preview_team: blue
+  blue_team_forbidden_texture_color: red
+  red_team_forbidden_texture_color: blue
+  source_occupancy_map: red_blue_boundary_sim.yaml
+  blue_team_map: blue_team_navigation_sim.yaml
+  red_team_map: red_team_navigation_sim.yaml
+  color_prototypes_rgb:
+    blue: [25, 184, 241]
+    red: [212, 58, 75]
+  color_distance_tolerance: 70
+
+# Settled pose of industrial_group/industrial_group_map used by the saved
+# occupancy grid. The parent model is non-static and moves from its SDF initial
+# pose during Gazebo startup, so composing the initial poses is incorrect.
+# Keep this configurable so a regenerated map can replace it without code edits.
+texture_marker:
+  frame_id: map
+  topic: /raicom/red_blue_field_texture
+  mesh_resource: package://raicom_2026_sim/meshes/industrial_group_map/industrial_group_map.dae
+  position: [-0.556491, 3.396710, 0.002]
+  orientation_rpy: [0.0, 0.0, 0.0]
+  scale: [1.0, 1.0, 1.0]
+  # Keep the navigation occupancy layer visible beneath the source texture.
+  alpha: 0.55

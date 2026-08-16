@@ -1,0 +1,34 @@
+# SIM_WORKING_ASSUMPTION: values are simulator tuning, not competition facts.
+scan_topic: /fuse_scan
+observation_topic: /round_table/observation
+circle_topic: /round_table/circle
+valid_topic: /round_table/valid
+diagnostic_topic: /round_table/diagnostic
+min_range_m: 0.05
+max_range_m: 4.0
+max_cluster_gap_m: 0.06
+min_points: 8
+min_radius_m: 0.12
+max_radius_m: 0.40
+max_residual_m: 0.015
+min_angle_span_rad: 0.20
+required_stable_frames: 3
+max_center_delta_m: 0.03
+# SIM_WORKING_ASSUMPTION: stationary samples near the table vary by up to about
+# 0.03 m because only a partial arc is visible. Radius range/residual/ambiguity
+# gates remain active; three consecutive fits are still required.
+max_radius_delta_m: 0.035
+ambiguity_score_ratio: 1.20
+ambiguity_residual_epsilon_m: 0.001
+# Circle-centre docking: target is a measured 0.03 m front gap, whose stated
+# SIM measurement uncertainty is 0.01 m. Completion uses 0.02..0.04 m.
+docking_front_extent_m: 0.24
+docking_lateral_alignment_tolerance_m: 0.10
+docking_face_alignment_tolerance_rad: 0.05
+docking_target_front_gap_m: 0.03
+docking_completion_gap_min_m: 0.02
+docking_completion_gap_max_m: 0.04
+docking_hard_minimum_gap_m: 0.01
+docking_required_complete_frames: 3
+docking_maximum_linear_speed_mps: 0.03
+docking_maximum_angular_speed_rps: 0.08

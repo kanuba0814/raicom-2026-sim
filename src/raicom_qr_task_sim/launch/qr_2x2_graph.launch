@@ -1,0 +1,7 @@
+<launch>
+  <!-- Read-only graph: detector reads cameras/TF; oracle reads Gazebo state. No executor/navigation/controllers. -->
+  <arg name="config" default="$(find raicom_qr_task_sim)/config/qr_2x2_sim.yaml"/>
+  <include file="$(find raicom_qr_task_sim)/launch/qr_2x2_scene.launch"><arg name="config" value="$(arg config)"/></include>
+  <node pkg="raicom_qr_task_sim" type="qr_camera_detector.py" name="qr_camera_detector" output="screen"><param name="config" value="$(arg config)"/></node>
+  <node pkg="raicom_qr_task_sim" type="qr_2x2_oracle.py" name="qr_2x2_oracle" output="screen"><param name="config" value="$(arg config)"/></node>
+</launch>

@@ -1,0 +1,21 @@
+# Runtime-only industrial-group SIM exercise. No values here describe a real field.
+assumption_status: SIM_WORKING_ASSUMPTION
+block:
+  size_xy_m: 0.040 # Rules-confirmed QR plan footprint.
+  thickness_m: 0.010 # SIM_WORKING_ASSUMPTION: official block thickness unresolved.
+  mass_kg: 0.040 # SIM_WORKING_ASSUMPTION: official block mass unresolved.
+rear_transfer:
+  # Proven legacy hover coordinates expressed in Base mm, retained as metres.
+  hover_base_m:
+    qr_block_01: [0.106, 0.191, 0.120]
+    qr_block_04: [0.106, 0.110, 0.120]
+  place_z_m: 0.040
+  # Unverified legacy transfer_pick_z=36 mm; retained only as a SIM assumption.
+  pickup_z_m: 0.036
+motion:
+  physical_tcp_clearance_m: 0.02578
+  source_lift_m: 0.040
+  destination_hover_m: 0.040
+  service_timeout_s: 2.0
+  vacuum_feedback_timeout_s: 2.0
+  stage_deadline_s: 12.0

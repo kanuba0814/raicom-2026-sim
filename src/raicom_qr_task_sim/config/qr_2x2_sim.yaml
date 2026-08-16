@@ -1,0 +1,41 @@
+# All values are SIM-only; status is machine-validated by load_sim_config().
+assumption_status: SIM_WORKING_ASSUMPTION
+frame_id: {value: world, assumption_status: SIM_WORKING_ASSUMPTION}
+qr_targets:
+  value:
+    - {target_id: qr-01, payload: SIM_QR_01}
+    - {target_id: qr-02, payload: SIM_QR_02}
+    - {target_id: qr-03, payload: SIM_QR_03}
+    - {target_id: qr-04, payload: SIM_QR_04}
+  assumption_status: SIM_WORKING_ASSUMPTION
+geometry:
+  value: {tray_size_xy_m: 0.220, tray_height_m: 0.020, qr_visual_thickness_m: 0.001}
+  assumption_status: SIM_WORKING_ASSUMPTION
+block:
+  value: {size_m: 0.050, mass_kg: 0.040, qr_marker_size_m: 0.040}
+  assumption_status: SIM_WORKING_ASSUMPTION
+pick_poses:
+  value:
+    qr-01: {xyz: [0.30, -0.20, 0.035], rpy: [0.0, 0.0, 0.0]}
+    qr-02: {xyz: [0.38, -0.20, 0.035], rpy: [0.0, 0.0, 0.0]}
+    qr-03: {xyz: [0.30, -0.12, 0.035], rpy: [0.0, 0.0, 0.0]}
+    qr-04: {xyz: [0.38, -0.12, 0.035], rpy: [0.0, 0.0, 0.0]}
+  assumption_status: SIM_WORKING_ASSUMPTION
+trays:
+  value:
+    pick: {xyz: [0.34, -0.16, 0.0], rpy: [0.0, 0.0, 0.0]}
+    place: {xyz: [0.70, -0.16, 0.0], rpy: [0.0, 0.0, 0.0]}
+  assumption_status: SIM_WORKING_ASSUMPTION
+slots:
+  value:
+    slot-01: {target_id: qr-01, xyz: [0.66, -0.20, 0.035], rpy: [0.0, 0.0, 0.0]}
+    slot-02: {target_id: qr-02, xyz: [0.74, -0.20, 0.035], rpy: [0.0, 0.0, 0.0]}
+    slot-03: {target_id: qr-03, xyz: [0.66, -0.12, 0.035], rpy: [0.0, 0.0, 0.0]}
+    slot-04: {target_id: qr-04, xyz: [0.74, -0.12, 0.035], rpy: [0.0, 0.0, 0.0]}
+  assumption_status: SIM_WORKING_ASSUMPTION
+detector:
+  value: {image_max_age_s: 0.50, camera_info_max_skew_s: 0.10, stable_frames_required: 3, max_reprojection_error_px: 3.0, workspace_xyz_min: [-1.0, -1.0, 0.0], workspace_xyz_max: [1.0, 1.0, 1.5]}
+  assumption_status: SIM_WORKING_ASSUMPTION
+oracle:
+  value: {xy_tolerance_m: 0.030, z_tolerance_m: 0.030, max_tilt_rad: 0.174533, stable_dwell_s: 1.0}
+  assumption_status: SIM_WORKING_ASSUMPTION

@@ -1,0 +1,27 @@
+# SIM_WORKING_ASSUMPTION: live SLAM localization and team boundary are separate layers.
+global_frame: map
+robot_base_frame: base_footprint
+update_frequency: 2.0
+publish_frequency: 1.0
+transform_tolerance: 0.5
+static_map: false
+rolling_window: false
+localization_static_layer:
+  enabled: true
+  map_topic: /map
+  use_maximum: true
+  subscribe_to_updates: true
+  track_unknown_space: false
+team_boundary_layer:
+  enabled: true
+  map_topic: /raicom/team_boundary_mask
+  use_maximum: true
+  subscribe_to_updates: true
+  track_unknown_space: false
+  lethal_cost_threshold: 100
+  trinary_costmap: true
+plugins:
+  - {name: localization_static_layer, type: "costmap_2d::StaticLayer"}
+  - {name: team_boundary_layer, type: "costmap_2d::StaticLayer"}
+  - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+  - {name: inflation_layer, type: "costmap_2d::InflationLayer"}

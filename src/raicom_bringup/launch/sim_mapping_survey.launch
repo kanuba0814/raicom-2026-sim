@@ -1,0 +1,15 @@
+<launch>
+  <!--
+    SIM_ONLY mapper plus gated final velocity output. It starts no motion
+    producer; raicomctl verifies sole /cmd_vel ownership before separately
+    starting sim_mapping_sweep.launch.
+  -->
+  <param name="/raicom/backend" value="SIM"/>
+  <include file="$(find raicom_bringup)/launch/safety.launch">
+    <!-- Gazebo-only final mapping; real.launch never uses this remap. -->
+    <arg name="final_cmd_vel" value="/cmd_vel"/>
+    <arg name="execution_profile_file"
+         value="$(find raicom_bringup)/config/execution_profiles.json"/>
+  </include>
+  <include file="$(find raicom_bringup)/launch/sim_mapping.launch"/>
+</launch>

@@ -1,0 +1,5 @@
+<launch>
+  <!-- One-shot overlay spawner; it never starts a docking motion node. -->
+  <arg name="profile" default="$(find raicom_charging_sim)/config/sim_charging_dock.yaml"/>
+  <node pkg="raicom_charging_sim" type="spawn_charge_pile.py" name="raicom_sim_charge_pile_spawner" args="$(arg profile)" output="screen" required="true"/>
+</launch>

@@ -1,0 +1,26 @@
+# SIM_WORKING_ASSUMPTION: current workbench QR payloads are physical 40 x 40 mm labels.
+# QR content is an allowlisted payload identifier. OpenCV QR is the current adapter;
+# a later YOLO footprint adapter must emit the same image-space Footprint contract.
+output_frame: hand_cam_link
+# SIM_CALIBRATED: established from the accepted camera-only workbench plane at
+# the fixed vehicle stop and 48-degree observation pose; never from Gazebo.
+# Venue/REAL requires its own persisted calibration profile.
+support_plane_frame: Base
+support_plane_point_m: [0.0, 0.0, 0.04704]
+support_plane_normal: [0.0, 0.0, 1.0]
+runtime_plane_authority: CALIBRATED_FIXED_WORKBENCH
+stale_after_s: 0.5
+max_input_skew_s: 0.10
+min_normal_camera_dot: 0.05
+# SIM_WORKING_ASSUMPTION: existing placement_height authority physical TCP clearance.
+tcp_clearance_m: 0.02578
+min_ray_plane_dot: 0.05
+min_quality: 0.01
+required_stable_frames: 3
+max_center_delta_px: 3.0
+# Each executor request opens at most this many camera frames.  This is a
+# SIM calibrated bounded slice, not a continuous perception profile.
+request_max_frames: 90
+# Exact simulator QR contents observed at the hand-camera pose; not colour inference.
+allowlisted_payloads: [SIM_QR_01, SIM_QR_04]
+support_surface_profile: sim_fixed_workbench_calibration
